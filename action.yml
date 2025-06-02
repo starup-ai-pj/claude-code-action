@@ -132,7 +132,7 @@ runs:
         #    "$PROMPT_TEXT" > "$OUTPUT_JSON"
 
         PROMPT_TEXT="$(cat "$PROMPT_FILE")"
-        /home/amano/.npm-global/bin/claude -p --output-format json "$PROMPT_TEXT" > "$OUTPUT_JSON"
+        /home/amano/.npm-global/bin/claude -p "$PROMPT_TEXT" --output-format json  > "$OUTPUT_JSON"
 
         if [[ $? -ne 0 ]]; then
           echo "ERROR: claude CLI exited with non-zero status"
