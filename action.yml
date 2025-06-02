@@ -126,9 +126,9 @@ runs:
         # 例：
         #  claude -p --output-format json \
         #    --model "sonnet" \
-        #    --allowedTools "\${{ inputs.allowed_tools }}" \
-        #    --disallowedTools "\${{ inputs.disallowed_tools }}" \
-        #    --mcp-config "\${{ steps.prepare.outputs.mcp_config }}" \
+        #    --allowedTools "{{ inputs.allowed_tools }}" \
+        #    --disallowedTools "{{ inputs.disallowed_tools }}" \
+        #    --mcp-config "{{ steps.prepare.outputs.mcp_config }}" \
         #    "$PROMPT_TEXT" > "$OUTPUT_JSON"
 
         PROMPT_TEXT="$(cat "$PROMPT_FILE")"
