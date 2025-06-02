@@ -1,4 +1,4 @@
-name: Claude Code
+name: Claude PR Assistant (self-hosted)
 
 on:
   issue_comment:
@@ -11,27 +11,24 @@ on:
     types: [submitted]
 
 jobs:
-  claude:
+  claude-code-action:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
-    runs-on: self-hosted
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
+    runs-on: [self-hosted, linux, x64]   # ランナー登録時のラベルに合わせて変更
     permissions:
       contents: read
       pull-requests: read
       issues: read
       id-token: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
-      - name: Run Claude Code
-        id: claude
-        uses: starup-ai-pj/claude-code-action@main
-        with:
-          allowed_tools: "Bash(bun install),Bash(bun test:*),Bash(bun run format),Bash(bun typecheck)"
-          custom_instructions: "You have also been granted tools for editing files and running bun commands (install, run, test, typecheck) for testing your changes: bun install, bun test, bun run format, bun typecheck."
+          
+      - name: Run Claude PR Action
+        uses: startup-ai-pj/claude-code-action@main
