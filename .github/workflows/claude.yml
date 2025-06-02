@@ -31,4 +31,4 @@ jobs:
           fetch-depth: 1
           
       - name: Run Claude PR Action
-        uses: startup-ai-pj/claude-code-action@main
+        uses: ./action.yml
